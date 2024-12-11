@@ -5,9 +5,13 @@ import base64
 import requests
 load_dotenv()
 
-s3 = boto3.client('s3')
+s3 = boto3.client('s3',
+                  aws_access_key_id=os.getenv('AWS_ACCESS_KEY'),
+                  aws_secret_access_key=os.getenv('AWS_SECRET_KEY')
+)
 
 S3_BUCKET = os.getenv('S3_BUCKET')
+
 if not S3_BUCKET:
     raise ValueError("S3_BUCKET environment variable is not set!")
 
